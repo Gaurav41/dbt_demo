@@ -5,7 +5,7 @@ with customers as(
 ),
 
 orders as(
-    select * from {{ref('stg_orders')}}
+    select * from {{ref('fact_orders')}}
 ),
 
 customer_orders as (

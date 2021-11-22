@@ -2,18 +2,26 @@
 version: 2
 models:
   - name: stg_customers
+    # To generate docs
+    description: Staged customer data from our jaffle shop app.
+
     columns:
       - name: customer_id
+        # To generate docs
+        description: The primary key for customers.
         tests:
           - unique
           - not_null
   - name: stg_orders
+    description: Staged order data from our jaffle shop app.
     columns:
       - name: order_id
+        description: Primary key for orders.
         tests:
           - unique
           - not_null
       - name: status
+        description: "{{ doc('order_status') }}"
         tests:
           - accepted_values:
               values: ['completed','returned','shipped','placed','return_pending']
@@ -23,6 +31,7 @@ models:
                 # - placed
       # Add a relationships test to your stg_orders model for the customer_id in stg_customers
       - name: customer_id
+        description: Foreign key to stg_customers.customer_id.
         tests:
           - relationships:
               to: ref('stg_customers')
