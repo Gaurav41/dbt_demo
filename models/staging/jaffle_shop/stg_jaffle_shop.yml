@@ -1,0 +1,31 @@
+# schema test
+version: 2
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['completed','returned','shipped','placed','return_pending']
+                # - completed
+                # - returned
+                # - shipped
+                # - placed
+      # Add a relationships test to your stg_orders model for the customer_id in stg_customers
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+  
