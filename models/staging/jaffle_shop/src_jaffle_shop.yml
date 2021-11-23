@@ -1,0 +1,31 @@
+# Source configuration
+# Generate documentation to view the sources in your DAG using dbt docs generate.
+version: 2
+
+
+sources:
+    # schema name
+  - name: jaffle_shop
+    # schema level doc
+    description: A clone of a Postgres application database.
+    database: raw
+    tables:
+      - name: customers
+        # Table level doc
+        description: Raw customers data.
+        columns:
+          - name: id
+            # column level doc
+            descriptioin: Primary key for customers. 
+            tests:
+              - unique
+              - not_null
+
+      - name: orders
+        columns:
+          - name: id
+            description: Primary key for orders.
+            tests:
+              - unique
+              - not_null
+
